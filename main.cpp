@@ -29,6 +29,8 @@ uint8_t sdata[2], res[6];
 int16_t acc16;
 float t[3];
 float v_down[3];
+float disp_h1;
+float disp_h2;
 
 DigitalOut redLED(LED1);
 InterruptIn trig(SW2);
@@ -110,13 +112,12 @@ void logAccel()
 	float ay = (t[1] - v_down[1]) * 9.8;
 	float az = (t[2] - v_down[2]) * 9.8;
 
-	if (abs(ax) > 1)
-	{
-		horizbuf[bi] = 1;
-	}
-	else
-	{
-		horizbuf[bi] = 0;
+	if(sqrt(pow(t[0] * v_down[0], 2) + pow(t[1] * v_down[1], 2) + pow(t[2] * v_down[2], 2)) < 0.1) {
+		disp_h1 += ax * 0.005;
+		disp_h2 += ay * 0.005;
+
+		if(abs(disp_h1) > 0.05 || abs(disp_h2) > 0.05) horizbuf[bi] = 1;
+		else horizbuf[bi] = 0;
 	}
 
 	bi++;
