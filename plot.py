@@ -13,6 +13,7 @@ serdev = '/dev/ttyACM0'
 s = serial.Serial(serdev, 115200)
 for i in range(0, 101):
 	line = s.readline()
+	print(line)
 
 	sline = line.decode().split(",")
 	x.append(float(sline[0]))
@@ -30,7 +31,7 @@ ax[0].legend()
 
 ax[1].stem(t, tilt)
 ax[1].set_xlabel('Time')
-ax[1].set_ylabel('Tilt')
+ax[1].set_ylabel('Horizontal Displacement')
 
 plt.show()
 s.close()

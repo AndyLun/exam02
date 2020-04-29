@@ -28,12 +28,13 @@ int m_addr = FXOS8700CQ_SLAVE_ADDR1;
 uint8_t sdata[2], res[6];
 int16_t acc16;
 float t[3];
+float v_down[3];
 
 DigitalOut redLED(LED1);
 InterruptIn trig(SW2);
 EventQueue queue;
 float buffer[3][101];
-int tiltbuf[101];
+int horizbuf[101];
 int bi = 0;
 
 void FXOS8700CQ_readRegs(int addr, uint8_t *data, int len);
@@ -60,13 +61,15 @@ int main()
 		if (!trig)
 		{
 			bi = 0;
+			readAccel();
+			v_down[0] = t[0]; v_down[1] = t[1]; v_down[2] = t[2];
 
 			queue.dispatch(9999);
 
 			redLED = 1;
 			for (int i = 0; i < 101; i++)
 			{
-				pc.printf("%1.4f,%1.4f,%1.4f,%d\r\n", buffer[0][i], buffer[1][i], buffer[2][i], tiltbuf[i]);
+				pc.printf("%1.4f,%1.4f,%1.4f,%d\r\n", buffer[0][i], buffer[1][i], buffer[2][i], horizbuf[i]);
 			}
 		}
 
@@ -102,13 +105,18 @@ void logAccel()
 	for (int i = 0; i < 3; i++)
 		buffer[i][bi] = t[i];
 
-	if (abs(t[0]) > 0.5 || abs(t[1]) > 0.5)
+	// Determine Horizontal Movement
+	float ax = (t[0] - v_down[0]) * 9.8;
+	float ay = (t[1] - v_down[1]) * 9.8;
+	float az = (t[2] - v_down[2]) * 9.8;
+
+	if (abs(ax) > 1)
 	{
-		tiltbuf[bi] = 1;
+		horizbuf[bi] = 1;
 	}
 	else
 	{
-		tiltbuf[bi] = 0;
+		horizbuf[bi] = 0;
 	}
 
 	bi++;
