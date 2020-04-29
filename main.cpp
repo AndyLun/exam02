@@ -118,9 +118,10 @@ void logAccel()
 		disp_h1 += ax * 0.005;
 		disp_h2 += ay * 0.005;
 
-		if(abs(disp_h1) > 0.05 || abs(disp_h2) > 0.05) horizbuf[bi] = 1;
+		//if(abs(disp_h1) > 0.05 || abs(disp_h2) > 0.05) horizbuf[bi] = 1;
+		if(abs(ax) > 1 || abs(ay) > 1) horizbuf[bi] = 1;
 		else horizbuf[bi] = 0;
-	}
+	} else horizbuf[bi] = 0;
 
 	bi++;
 }
