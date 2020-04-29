@@ -16,10 +16,12 @@ for i in range(0, 101):
 	print(line)
 
 	sline = line.decode().split(",")
-	x.append(float(sline[0]))
-	y.append(float(sline[1]))
-	z.append(float(sline[2]))
-	tilt.append(int(sline[3][0]))
+
+	if len(sline) == 4:
+		x.append(float(sline[0]))
+		y.append(float(sline[1]))
+		z.append(float(sline[2]))
+		tilt.append(int(sline[3][0]))
 
 fig, ax = plt.subplots(2, 1)
 ax[0].plot(t, x, 'r', label="X")
