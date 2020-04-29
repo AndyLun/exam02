@@ -13,21 +13,21 @@
     {
         "module": "BUILD/K66F",
         "size": {
-            ".text": 1346,
+            ".text": 1231,
             ".data": 4,
-            ".bss": 1938,
-            ".text-delta": 71,
+            ".bss": 1930,
+            ".text-delta": -115,
             ".data-delta": 0,
-            ".bss-delta": 0
+            ".bss-delta": -8
         }
     },
     {
         "module": "[fill]",
         "size": {
-            ".text": 213,
+            ".text": 208,
             ".data": 14,
             ".bss": 35,
-            ".text-delta": 1,
+            ".text-delta": -5,
             ".data-delta": 0,
             ".bss-delta": 0
         }
@@ -89,10 +89,10 @@
     },
     {
         "summary": {
-            "static_ram": 12472,
-            "static_ram_delta": 0,
-            "total_flash": 81078,
-            "total_flash_delta": 72
+            "static_ram": 12464,
+            "static_ram_delta": -8,
+            "total_flash": 80958,
+            "total_flash_delta": -120
         }
     }
 ]
