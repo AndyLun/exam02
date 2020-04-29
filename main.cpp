@@ -117,6 +117,7 @@ void logAccel()
 	if(sqrt(pow(t[0] * v_down[0], 2) + pow(t[1] * v_down[1], 2) + pow(t[2] * v_down[2], 2)) > 0.8) {
 		disp_h1 += ax * 0.005;
 		disp_h2 += ay * 0.005;
+		pc.printf("%1.4f, %1.4f\r\n", disp_h1, disp_h2);
 
 		//if(abs(disp_h1) > 0.05 || abs(disp_h2) > 0.05) horizbuf[bi] = 1;
 		if(abs(ax) > 1 || abs(ay) > 1) horizbuf[bi] = 1;
