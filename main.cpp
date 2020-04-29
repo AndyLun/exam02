@@ -72,6 +72,7 @@ int main()
 			for (int i = 0; i < 101; i++)
 			{
 				pc.printf("%1.4f,%1.4f,%1.4f,%d\r\n", buffer[0][i], buffer[1][i], buffer[2][i], horizbuf[i]);
+				wait(0.05);
 			}
 		}
 
