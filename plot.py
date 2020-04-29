@@ -7,33 +7,18 @@ t = np.arange(0, 10.1, 0.1)
 x = []
 y = []
 z = []
-tilt = []
+ho = []
 
 serdev = '/dev/ttyACM0'
 s = serial.Serial(serdev, 115200)
 for i in range(0, 101):
 	line = s.readline()
-	print(line)
 
 	sline = line.decode().split(",")
-
-	if len(sline) == 4:
-		try:
-			x.append(float(sline[0]))
-		except ValueError:
-			x.append(0)
-		try:
-			y.append(float(sline[1]))
-		except ValueError:
-			y.append(0)
-		try:
-			z.append(float(sline[2]))
-		except ValueError:
-			z.append(0)
-		try:
-			tilt.append(int(sline[3][0]))
-		except ValueError:
-			tilt.append(0)
+	x.append(float(sline[0]))
+	y.append(float(sline[1]))
+	z.append(float(sline[2]))
+	ho.append(int(sline[3][0]))
 			
 
 fig, ax = plt.subplots(2, 1)
@@ -44,7 +29,7 @@ ax[0].set_xlabel('Time')
 ax[0].set_ylabel('Acc Vector')
 ax[0].legend()
 
-ax[1].stem(t, tilt)
+ax[1].stem(t, ho)
 ax[1].set_xlabel('Time')
 ax[1].set_ylabel('Horizontal Displacement')
 
