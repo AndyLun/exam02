@@ -108,14 +108,12 @@ void logAccel()
 	for (int i = 0; i < 3; i++)
 		buffer[i][bi] = t[i];
 
-	// Determine Horizontal Movement
 	float ax = (t[0] - v_down[0]) * 9.8;
 	float ay = (t[1] - v_down[1]) * 9.8;
 	float az = (t[2] - v_down[2]) * 9.8;
 
-	if(sqrt(pow(t[0] * v_down[0], 2) + pow(t[1] * v_down[1], 2) + pow(t[2] * v_down[2], 2)) > 0.8) {
+	if(sqrt(pow(t[0] * v_down[0], 2) + pow(t[1] * v_down[1], 2) + pow(t[2] * v_down[2], 2)) > 0.8) {	// Determine horizontal movement
 		if(abs(ax * 0.01/2) > 0.05 || abs(ay * 0.01/2) > 0.05) horizbuf[bi] = 1;
-		//if(abs(ax) > 1 || abs(ay) > 1) horizbuf[bi] = 1;
 		else horizbuf[bi] = 0;
 	} else horizbuf[bi] = 0;
 
