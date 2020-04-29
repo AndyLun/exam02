@@ -18,10 +18,23 @@ for i in range(0, 101):
 	sline = line.decode().split(",")
 
 	if len(sline) == 4:
-		x.append(float(sline[0]))
-		y.append(float(sline[1]))
-		z.append(float(sline[2]))
-		tilt.append(int(sline[3][0]))
+		try:
+			x.append(float(sline[0]))
+		except ValueError:
+			x.append(0)
+		try:
+			y.append(float(sline[1]))
+		except ValueError:
+			y.append(0)
+		try:
+			z.append(float(sline[2]))
+		except ValueError:
+			z.append(0)
+		try:
+			tilt.append(int(sline[3][0]))
+		except ValueError:
+			tilt.append(0)
+			
 
 fig, ax = plt.subplots(2, 1)
 ax[0].plot(t, x, 'r', label="X")
